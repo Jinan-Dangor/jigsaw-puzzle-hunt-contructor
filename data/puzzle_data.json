@@ -1,0 +1,72 @@
+{
+    "puzzles": [
+        {  
+            "ID": "PUZZLE01",
+            "name": "Puzzle 01",
+            "solution": "Solution 01",
+            "page": "puzzle01.html"
+        },
+        {  
+            "ID": "PUZZLE02",
+            "name": "Puzzle 02",
+            "solution": "Solution 02",
+            "page": "puzzle02.html"
+        },
+        {  
+            "ID": "PUZZLE03",
+            "name": "Puzzle 03",
+            "solution": "Solution 03",
+            "page": "puzzle03.html"
+        },
+        {  
+            "ID": "PUZZLE04",
+            "name": "Puzzle 04",
+            "solution": "Solution 04",
+            "page": "puzzle04.html"
+        },
+        {  
+            "ID": "PUZZLE05",
+            "name": "Puzzle 05",
+            "solution": "Solution 05",
+            "page": "puzzle05.html"
+        },
+        {  
+            "ID": "PUZZLE06",
+            "name": "Puzzle 06",
+            "solution": "Solution 06",
+            "page": "puzzle06.html"
+        },
+        {  
+            "ID": "PUZZLE07",
+            "name": "Puzzle 07",
+            "solution": "Solution 07",
+            "page": "puzzle07.html"
+        },
+        {  
+            "ID": "PUZZLE08",
+            "name": "Puzzle 08",
+            "solution": "Solution 08",
+            "page": "puzzle08.html"
+        },
+        {  
+            "ID": "PUZZLE09",
+            "name": "Puzzle 09",
+            "solution": "Solution 09",
+            "page": "puzzle09.html"
+        }
+    ],
+    "rounds": [
+        {
+            "ID": "ROUND01",
+            "page": "round01.html"
+        },
+        {
+            "ID": "ROUND02",
+            "page": "round02.html"
+        },
+        {
+            "ID": "METAROUND",
+            "page": "metaround.html"
+        }
+    ]
+}
