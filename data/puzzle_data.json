@@ -4,6 +4,7 @@
             "class": "round",
             "ID": "ROUND01",
             "page": "round01.html",
+            "round": "Round 01",
             "contents": [
                 {  
                     "class": "puzzle",
@@ -32,6 +33,7 @@
             "class": "round",
             "ID": "ROUND02",
             "page": "round02.html",
+            "round": "Round 02",
             "contents": [
                 {  
                     "class": "puzzle",
@@ -58,6 +60,7 @@
                     "class": "round",
                     "ID": "METAROUND",
                     "page": "metaround.html",
+                    "round": "Round (Meta)",
                     "contents": [
                         {  
                             "class": "puzzle",
