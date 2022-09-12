@@ -2,20 +2,20 @@ const fs = require("fs");
 
 var puzzle_data;
 {
-  data = fs.readFileSync("../data/puzzle_data.json", "utf8");
+  let data = fs.readFileSync("../data/puzzle_data.json", "utf8");
   const file_data = data.toString();
   puzzle_data = JSON.parse(file_data);
 }
 
 var round_page_html;
 {
-  data = fs.readFileSync("round_page_template.html", "utf8");
+  let data = fs.readFileSync("round_page_template.html", "utf8");
   round_page_html = data.toString();
 }
 
 var puzzle_page_html;
 {
-  data = fs.readFileSync("puzzle_page_template.html", "utf8");
+  let data = fs.readFileSync("puzzle_page_template.html", "utf8");
   puzzle_page_html = data.toString();
 }
 
@@ -53,27 +53,47 @@ function generate_puzzle_page(puzzle, parents) {
   });
 }
 
+// TODO: Make it work with:
+// Placeholders - DONE
+// Files
+// Hidden files/placeholders (once cookies are done)
 function make_subtitutions(page, item, parents) {
   const spaces_to_fill = page.match(/\%JIGSAW\%[^%]*\%[^%]*\%/g);
   for (let i = 0; i < spaces_to_fill.length; i++) {
-    let new_text = get_field(item, parents, spaces_to_fill[i].split("%")[3]);
-    page = page.replace(spaces_to_fill[i], new_text);
+    let arguments = spaces_to_fill[i].split("%");
+    let new_text = get_field(item, parents, arguments[3]);
+    if (arguments[2] == "PLACEHOLDER") {
+      page = substitute_placeholder(page, spaces_to_fill[i], new_text);
+    } else if (arguments[2] == "FILE") {
+      page = substitute_file(page, spaces_to_fill[i], new_text);
+    }
   }
   return page;
 }
 
 function get_field(item, parents, field) {
-  console.log("Looking to get the field " + field + " for item " + item.ID);
   if (item.hasOwnProperty(field)) {
     return item[field];
   }
-  console.log("Doesn't have it, checking parents");
   for (let i = parents.length-1; i >= 0; i--) {
-    console.log("Checking parent: " + parents[i].ID);
     if (parents[i].hasOwnProperty(field)) {
       return parents[i][field];
     }
   }
 
   return null;
+}
+
+function substitute_placeholder(page, placeholder, text) {
+  return page.replace(placeholder, text);
+}
+
+function substitute_file(page, placeholder, file) {
+  var file_contents;
+  {
+    let data = fs.readFileSync("resources/"+file, "utf8");
+    file_contents = data.toString();
+  }
+
+  return page.replace(placeholder, file_contents);;
 }
