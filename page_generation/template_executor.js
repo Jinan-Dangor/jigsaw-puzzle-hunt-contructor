@@ -55,7 +55,7 @@ function generate_puzzle_page(puzzle, parents) {
 
 // TODO: Make it work with:
 // Placeholders - DONE
-// Files
+// Files - DONE
 // Hidden files/placeholders (once cookies are done)
 function make_subtitutions(page, item, parents) {
   const spaces_to_fill = page.match(/\%JIGSAW\%[^%]*\%[^%]*\%/g);
