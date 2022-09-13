@@ -21,13 +21,13 @@ for (let i = 0; i < puzzle_data.contents.length; i++) {
   generate_page(puzzle_data.contents[i], []);
 }
 
-// Generate Initial Cookie
-var cookie_init_script;
-{ let data = fs.readFileSync("cookie_init_template.js", "utf8");
-  cookie_init_script = data.toString();
+// Generate Initial Storage
+var storage_init_script;
+{ let data = fs.readFileSync("storage_init_template.js", "utf8");
+storage_init_script = data.toString();
 }
-cookie_init_script = "var data_cookie = 'PUZZLE_DATA=" + JSON.stringify(puzzle_data) + "';\n\n" + cookie_init_script;
-fs.writeFileSync("cookie_init.js", cookie_init_script);
+storage_init_script = "localStorage.setItem('puzzle_data', '" + JSON.stringify(puzzle_data) + "');\n" + storage_init_script;
+fs.writeFileSync("storage_init.js", storage_init_script);
 
 
 
@@ -60,11 +60,6 @@ function generate_puzzle_page(puzzle, parents) {
 
 
 
-
-// TODO: Make it work with:
-// Placeholders - DONE
-// Files - DONE
-// Hidden files/placeholders (once cookies are done)
 function make_subtitutions(page, item, parents) {
   const spaces_to_fill = page.match(/\%JIGSAW\%[^%]*\%[^%]*\%/g);
   for (let i = 0; i < spaces_to_fill.length; i++) {
