@@ -19,9 +19,19 @@ var puzzle_page_html;
   puzzle_page_html = data.toString();
 }
 
+// Generate Pages
 for (let i = 0; i < puzzle_data.contents.length; i++) {
   generate_page(puzzle_data.contents[i], []);
 }
+
+// Generate Initial Cookie
+var cookie_init_script;
+{
+  let data = fs.readFileSync("cookie_init_template.js", "utf8");
+  cookie_init_script = data.toString();
+}
+cookie_init_script = "var data_cookie = '" + JSON.stringify(puzzle_data) + "';\n\n" + cookie_init_script;
+fs.writeFileSync("cookie_init.js", cookie_init_script);
 
 function generate_page(item, parents) {
   if (item.class == "round") {
@@ -35,9 +45,7 @@ function generate_page(item, parents) {
 
 function generate_round_page(round, parents) {
   let round_page_html_modified = make_subtitutions(round_page_html, round, parents) + '\n\n<script src="template_filler.js"></script>';
-  fs.appendFile("round_page_" + round.page, round_page_html_modified, function (err) {
-    if (err) throw err;
-  });
+  fs.writeFileSync("round_page_" + round.page, round_page_html_modified);
 
   for (let i = 0; i < round.contents.length; i++) {
     let new_parents = Array.from(parents);
@@ -48,9 +56,7 @@ function generate_round_page(round, parents) {
 
 function generate_puzzle_page(puzzle, parents) {
   let puzzle_page_html_modified = make_subtitutions(puzzle_page_html, puzzle, parents) + '\n\n<script src="template_filler.js"></script>';
-  fs.appendFile("puzzle_page_" + puzzle.page, puzzle_page_html_modified, function (err) {
-    if (err) throw err;
-  });
+  fs.writeFileSync("puzzle_page_" + puzzle.page, puzzle_page_html_modified);
 }
 
 // TODO: Make it work with:
