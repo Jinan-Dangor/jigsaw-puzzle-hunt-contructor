@@ -1,21 +1,18 @@
 const fs = require("fs");
 
 var puzzle_data;
-{
-  let data = fs.readFileSync("../data/puzzle_data.json", "utf8");
+{ let data = fs.readFileSync("../data/puzzle_data.json", "utf8");
   const file_data = data.toString();
   puzzle_data = JSON.parse(file_data);
 }
 
 var round_page_html;
-{
-  let data = fs.readFileSync("round_page_template.html", "utf8");
+{ let data = fs.readFileSync("round_page_template.html", "utf8");
   round_page_html = data.toString();
 }
 
 var puzzle_page_html;
-{
-  let data = fs.readFileSync("puzzle_page_template.html", "utf8");
+{ let data = fs.readFileSync("puzzle_page_template.html", "utf8");
   puzzle_page_html = data.toString();
 }
 
@@ -26,12 +23,14 @@ for (let i = 0; i < puzzle_data.contents.length; i++) {
 
 // Generate Initial Cookie
 var cookie_init_script;
-{
-  let data = fs.readFileSync("cookie_init_template.js", "utf8");
+{ let data = fs.readFileSync("cookie_init_template.js", "utf8");
   cookie_init_script = data.toString();
 }
-cookie_init_script = "var data_cookie = '" + JSON.stringify(puzzle_data) + "';\n\n" + cookie_init_script;
+cookie_init_script = "var data_cookie = 'puzzle_data=" + JSON.stringify(puzzle_data) + "';\n\n" + cookie_init_script;
 fs.writeFileSync("cookie_init.js", cookie_init_script);
+
+
+
 
 function generate_page(item, parents) {
   if (item.class == "round") {
@@ -58,6 +57,9 @@ function generate_puzzle_page(puzzle, parents) {
   let puzzle_page_html_modified = make_subtitutions(puzzle_page_html, puzzle, parents) + '\n\n<script src="template_filler.js"></script>';
   fs.writeFileSync("puzzle_page_" + puzzle.page, puzzle_page_html_modified);
 }
+
+
+
 
 // TODO: Make it work with:
 // Placeholders - DONE
