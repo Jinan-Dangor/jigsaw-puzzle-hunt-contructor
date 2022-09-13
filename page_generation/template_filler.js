@@ -24,9 +24,9 @@ function evaluate_condition(condition) {
     let condition_args = condition_breakdown[1];
 
     if        (condition_type == "NUM_UNLOCKS") {
-        return evaluate_num_unlocks(parseInt(conditions_args));
+        return evaluate_num_unlocks(parseInt(condition_args));
     } else if (condition_type == "PUZZLE_SOLVED") {
-        return evaluate_puzzle_solved(conditions_args);
+        return evaluate_puzzle_solved(condition_args);
     } else {
         return false;
     }
@@ -35,6 +35,7 @@ function evaluate_condition(condition) {
 // Doesn't yet account for timed unlocks
 function evaluate_num_unlocks(target) {
     let num_unlocks = parseInt(getCookie("PUZZLES_SOLVED"));
+    console.log("Comparing " + num_unlocks + " to the desired " + target + " unlocks.");
     return num_unlocks >= target;
 }
 
