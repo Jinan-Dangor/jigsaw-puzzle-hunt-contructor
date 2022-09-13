@@ -1,6 +1,7 @@
 let hidden_tags = document.querySelectorAll("[jigsaw-hidden]");
 
 // TODO: initially hidden, unhidden upon not removing
+// TODO: if cookies are missing, hide nothing (for offline editting)
 for (let i = 0; i < hidden_tags.length; i++) {
     let visible = evaluate_conditions(hidden_tags[i].getAttribute("jigsaw-hidden"));
     if (!visible) {
