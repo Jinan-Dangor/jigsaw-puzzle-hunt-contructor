@@ -34,7 +34,7 @@ function generate_page(item, parents) {
 }
 
 function generate_round_page(round, parents) {
-  let round_page_html_modified = make_subtitutions(round_page_html, round, parents);
+  let round_page_html_modified = make_subtitutions(round_page_html, round, parents) + '\n\n<script src="template_filler.js"></script>';
   fs.appendFile("round_page_" + round.page, round_page_html_modified, function (err) {
     if (err) throw err;
   });
@@ -47,7 +47,7 @@ function generate_round_page(round, parents) {
 }
 
 function generate_puzzle_page(puzzle, parents) {
-  let puzzle_page_html_modified = make_subtitutions(puzzle_page_html, puzzle, parents);
+  let puzzle_page_html_modified = make_subtitutions(puzzle_page_html, puzzle, parents) + '\n\n<script src="template_filler.js"></script>';
   fs.appendFile("puzzle_page_" + puzzle.page, puzzle_page_html_modified, function (err) {
     if (err) throw err;
   });

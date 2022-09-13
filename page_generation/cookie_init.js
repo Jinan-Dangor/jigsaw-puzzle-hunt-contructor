@@ -1,4 +1,4 @@
-setCookie("puzzles_solved=3;", 9999, "/");
+setCookie("PUZZLES_SOLVED=1;", 9999, "/");
 console.log("Cookies: " + document.cookie);
 
 function setCookie(content, exdays, path) {
