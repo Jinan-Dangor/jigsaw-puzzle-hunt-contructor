@@ -35,28 +35,11 @@ function evaluate_condition(condition) {
 
 // Doesn't yet account for timed unlocks
 function evaluate_num_unlocks(target) {
-    let num_unlocks = parseInt(getCookie("PUZZLES_SOLVED"));
+    let num_unlocks = parseInt(localStorage.getItem("puzzles_solved"));
     console.log("Comparing " + num_unlocks + " to the desired " + target + " unlocks.");
     return num_unlocks >= target;
 }
 
 function evaluate_puzzle_solved(puzzle_id) {
-    return getCookie(puzzle_id+"_SOLVED") == "TRUE";
-}
-
-// From W3Schools
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = document.cookie;
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
+    return localStorage.getItem(puzzle_id+"_solved") == "TRUE";
 }
