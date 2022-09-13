@@ -1,5 +1,5 @@
 let answer_space = document.querySelector("[jigsaw-example]");
-console.log(getCookie("puzzle_data"));
+console.log(getCookie("PUZZLE_DATA"));
 let puzzle_data = JSON.parse(getCookie("puzzle_data"));
 
 answer_space.innerHTML = get_field(puzzle_data.contents[0].contents[0], "solution");

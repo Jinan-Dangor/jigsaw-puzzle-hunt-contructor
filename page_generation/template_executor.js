@@ -26,7 +26,7 @@ var cookie_init_script;
 { let data = fs.readFileSync("cookie_init_template.js", "utf8");
   cookie_init_script = data.toString();
 }
-cookie_init_script = "var data_cookie = 'puzzle_data=" + JSON.stringify(puzzle_data) + "';\n\n" + cookie_init_script;
+cookie_init_script = "var data_cookie = 'PUZZLE_DATA=" + JSON.stringify(puzzle_data) + "';\n\n" + cookie_init_script;
 fs.writeFileSync("cookie_init.js", cookie_init_script);
 
 
