@@ -30,6 +30,8 @@ function evaluate_condition(condition) {
         return evaluate_num_unlocks(parseInt(condition_args));
     } else if (condition_type == "PUZZLE_SOLVED") {
         return evaluate_puzzle_solved(condition_args);
+    } else if (condition_type == "PUZZLE_UNLOCKED") {
+        return evaluate_puzzle_unlocked(condition_args);
     } else {
         return false;
     }
@@ -43,4 +45,44 @@ function evaluate_num_unlocks(target) {
 
 function evaluate_puzzle_solved(puzzle_id) {
     return localStorage.getItem(puzzle_id+"_solved") != null;
+}
+
+function evaluate_puzzle_unlocked(puzzle_id) {
+    let puzzle_data = JSON.parse(localStorage.getItem("puzzle_data"));
+    let item_and_parents = get_item_and_parents_by_id(puzzle_data, puzzle_id);
+    let item = item_and_parents.shift();
+    return evaluate_condition(get_field(item, item_and_parents, "unlock_condition"));
+}
+
+function get_field(item, parents, field) {
+    if (item.hasOwnProperty(field)) {
+        return item[field];
+    }
+    for (let i = parents.length-1; i >= 0; i--) {
+        if (parents[i].hasOwnProperty(field)) {
+            return parents[i][field];
+        }
+    }
+
+    return null;
+}
+
+function get_item_and_parents_by_id(data, id) {
+    if (data.ID == id) {
+        return [data];
+    }
+
+    if (!data.hasOwnProperty("contents")) {
+        return null;
+    }
+
+    for (let i = 0; i < data.contents.length; i++) {
+        let child_data = get_item_and_parents_by_id(data.contents[i], id);
+        if (child_data != null) {
+            child_data.push(data);
+            return child_data;
+        }
+    }
+
+    return null;
 }

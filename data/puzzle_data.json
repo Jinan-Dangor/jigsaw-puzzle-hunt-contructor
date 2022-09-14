@@ -32,6 +32,7 @@
                     "ID": "PUZZLE04",
                     "name": "Puzzle 04",
                     "solution": "Solution 04",
+                    "unlock_condition": "NUM_UNLOCKS:1",
                     "page": "puzzle04.html"
                 },
                 {  
@@ -39,6 +40,7 @@
                     "ID": "PUZZLE05",
                     "name": "Puzzle 05",
                     "solution": "Solution 05",
+                    "unlock_condition": "NUM_UNLOCKS:2",
                     "page": "puzzle05.html"
                 },
                 {  
@@ -46,6 +48,7 @@
                     "ID": "PUZZLE06",
                     "name": "Puzzle 06",
                     "solution": "Solution 06",
+                    "unlock_condition": "NUM_UNLOCKS:3",
                     "page": "puzzle06.html"
                 }
             ]
@@ -55,6 +58,7 @@
             "ID": "ROUND02",
             "page": "round02.html",
             "round": "Round 02",
+            "unlock_condition": "PUZZLE_SOLVED:PUZZLE06",
             "contents": [
                 {  
                     "class": "puzzle",
@@ -68,6 +72,7 @@
                     "ID": "PUZZLE08",
                     "name": "Puzzle 08",
                     "solution": "Solution 08",
+                    "unlock_condition": "NUM_UNLOCKS:5",
                     "page": "puzzle08.html"
                 },
                 {  
@@ -75,6 +80,7 @@
                     "ID": "PUZZLE09",
                     "name": "Puzzle 09",
                     "solution": "Solution 09",
+                    "unlock_condition": "NUM_UNLOCKS:6",
                     "page": "puzzle09.html"
                 },
                 {
@@ -82,6 +88,7 @@
                     "ID": "METAROUND",
                     "page": "metaround.html",
                     "round": "Round (Meta)",
+                    "unlock_condition": "NUM_UNLOCKS:7",
                     "contents": [
                         {  
                             "class": "puzzle",
