@@ -6,6 +6,8 @@ for (let i = 0; i < hidden_tags.length; i++) {
     let visible = evaluate_conditions(hidden_tags[i].getAttribute("jigsaw-hidden"));
     if (!visible) {
         hidden_tags[i].remove();
+    } else {
+        hidden_tags[i].removeAttribute('style');
     }
 }
 

@@ -11,42 +11,36 @@ function check_answer() {
     let answer_textbox = document.querySelector("[jigsaw-element='answer_submit_entry']");
     let normalised_answer = answer_textbox.value.replace(/[^a-zA-Z\d]/g,'').toUpperCase();
     if (item.solution.replace(/[^a-zA-Z\d]/g,'').toUpperCase() == normalised_answer) {
-        console.log("Right answer: " + normalised_answer);
         correct_answer(normalised_answer);
+        log_correct_answer(normalised_answer);
     } else {
-        console.log("Wrong answer: " + normalised_answer);
         incorrect_answer(normalised_answer);
     }
 }
 
 var answer_correct_area = document.querySelector("[jigsaw-element='answer_correct_area']");
+answer_correct_area.setAttribute('style', 'display:none');
 var answer_incorrect_area = document.querySelector("[jigsaw-element='answer_incorrect_area']");
-
-var active_answer_box = "none";
-var answer_correct_area_other_display = "none";
-var answer_incorrect_area_other_display = "none";
-[answer_correct_area_other_display, answer_correct_area.style.display] = [answer_correct_area.style.display, answer_correct_area_other_display];
-[answer_incorrect_area_other_display, answer_incorrect_area.style.display] = [answer_incorrect_area.style.display, answer_incorrect_area_other_display];
+answer_incorrect_area.setAttribute('style', 'display:none');
+var answer_submit_area = document.querySelector("[jigsaw-element='answer_submit_area']");
 
 if (localStorage.getItem(item.ID+"_solved") != null) {
     correct_answer(localStorage.getItem(item.ID+"_solved"));
+} else {
+    answer_submit_area.removeAttribute('style');
 }
 
 function correct_answer(answer) {
     let answer_box = document.querySelector("[jigsaw-element='answer_correct_text']");
     answer_box.innerHTML = answer;
 
-    if (active_answer_box == "none") {
-        [answer_correct_area_other_display, answer_correct_area.style.display] = [answer_correct_area.style.display, answer_correct_area_other_display];
-        active_answer_box = "correct";
-    } else if (active_answer_box == "incorrect") {
-        answer_incorrect_area.style.display = "none";
-        [answer_correct_area_other_display, answer_correct_area.style.display] = [answer_correct_area.style.display, answer_correct_area_other_display];
-    }
+    answer_correct_area.removeAttribute('style');
+    answer_incorrect_area.setAttribute('style', 'display:none');
 
-    let answer_submit_area = document.querySelector("[jigsaw-element='answer_submit_area']");
-    answer_submit_area.style.display = "none";
+    answer_submit_area.setAttribute('style', 'display:none');
+}
 
+function log_correct_answer(answer) {
     localStorage.setItem(item.ID+"_solved", answer);
     localStorage.setItem("puzzles_solved", parseInt(localStorage.getItem("puzzles_solved"))+1);
 }
@@ -55,10 +49,7 @@ function incorrect_answer(answer) {
     let answer_box = document.querySelector("[jigsaw-element='answer_incorrect_text']");
     answer_box.innerHTML = answer;
 
-    if (active_answer_box == "none") {
-        [answer_incorrect_area_other_display, answer_incorrect_area.style.display] = [answer_incorrect_area.style.display, answer_incorrect_area_other_display];
-        active_answer_box = "incorrect";
-    }
+    answer_incorrect_area.removeAttribute('style');
 }
 
 function get_field(item, parents, field) {

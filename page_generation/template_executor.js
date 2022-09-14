@@ -71,6 +71,8 @@ function make_subtitutions(page, item, parents) {
       page = substitute_file(page, spaces_to_fill[i], new_text);
     }
   }
+  page = make_elements_hidden(page);
+
   return page;
 }
 
@@ -98,5 +100,17 @@ function substitute_file(page, placeholder, file) {
     file_contents = data.toString();
   }
 
-  return page.replace(placeholder, file_contents);;
+  return page.replace(placeholder, file_contents);
+}
+
+function make_elements_hidden(page) {
+  let hidden_jigsaw_elements = ["answer_submit_area", "answer_correct_area", "answer_incorrect_area"];
+  page = page.replaceAll("jigsaw-hidden", "style='display:none', jigsaw-hidden");
+
+  for (let i = 0; i < hidden_jigsaw_elements.length; i++) {
+    let search_string = 'jigsaw-element="' + hidden_jigsaw_elements[i] + '"';
+    page = page.replaceAll(search_string, 'style="display:none", ' + search_string);
+  }
+
+  return page;
 }

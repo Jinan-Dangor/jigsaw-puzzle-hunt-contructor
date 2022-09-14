@@ -2,3 +2,6 @@
 Jigsaw Puzzle Hunt Constructor allows you to build static puzzle hunt websites that mimic the behaviour of live hunts.
 
 To make a hunt, fork this repository, then build up your hunt according to the documentation.
+
+Note: Do not apply attributes directly to jigsaw-element tags, these tags have attributes modified through code which may conflict with provided attributes.
+Instead, apply attributes to a div outside the tag, or otherwise.
