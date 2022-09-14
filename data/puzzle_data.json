@@ -26,15 +26,7 @@
                     "name": "Puzzle 03",
                     "solution": "Solution 03",
                     "page": "puzzle03.html"
-                }
-            ]
-        },
-        {
-            "class": "round",
-            "ID": "ROUND02",
-            "page": "round02.html",
-            "round": "Round 02",
-            "contents": [
+                },
                 {  
                     "class": "puzzle",
                     "ID": "PUZZLE04",
@@ -55,6 +47,35 @@
                     "name": "Puzzle 06",
                     "solution": "Solution 06",
                     "page": "puzzle06.html"
+                }
+            ]
+        },
+        {
+            "class": "round",
+            "ID": "ROUND02",
+            "page": "round02.html",
+            "round": "Round 02",
+            "contents": [
+                {  
+                    "class": "puzzle",
+                    "ID": "PUZZLE07",
+                    "name": "Puzzle 07",
+                    "solution": "Solution 07",
+                    "page": "puzzle07.html"
+                },
+                {  
+                    "class": "puzzle",
+                    "ID": "PUZZLE08",
+                    "name": "Puzzle 08",
+                    "solution": "Solution 08",
+                    "page": "puzzle08.html"
+                },
+                {  
+                    "class": "puzzle",
+                    "ID": "PUZZLE09",
+                    "name": "Puzzle 09",
+                    "solution": "Solution 09",
+                    "page": "puzzle09.html"
                 },
                 {
                     "class": "round",
@@ -64,24 +85,24 @@
                     "contents": [
                         {  
                             "class": "puzzle",
-                            "ID": "PUZZLE07",
-                            "name": "Puzzle 07",
-                            "solution": "Solution 07",
-                            "page": "puzzle07.html"
+                            "ID": "PUZZLE10",
+                            "name": "Puzzle 10",
+                            "solution": "Solution 10",
+                            "page": "puzzle10.html"
                         },
                         {  
                             "class": "puzzle",
-                            "ID": "PUZZLE08",
-                            "name": "Puzzle 08",
-                            "solution": "Solution 08",
-                            "page": "puzzle08.html"
+                            "ID": "PUZZLE11",
+                            "name": "Puzzle 11",
+                            "solution": "Solution 11",
+                            "page": "puzzle11.html"
                         },
                         {  
                             "class": "puzzle",
-                            "ID": "PUZZLE09",
-                            "name": "Puzzle 09",
-                            "solution": "Solution 09",
-                            "page": "puzzle09.html"
+                            "ID": "PUZZLE12",
+                            "name": "Puzzle 12",
+                            "solution": "Solution 12",
+                            "page": "puzzle12.html"
                         }
                     ]
                 }

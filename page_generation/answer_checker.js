@@ -28,6 +28,10 @@ var answer_incorrect_area_other_display = "none";
 [answer_correct_area_other_display, answer_correct_area.style.display] = [answer_correct_area.style.display, answer_correct_area_other_display];
 [answer_incorrect_area_other_display, answer_incorrect_area.style.display] = [answer_incorrect_area.style.display, answer_incorrect_area_other_display];
 
+if (localStorage.getItem(item.ID+"_solved") != null) {
+    correct_answer(localStorage.getItem(item.ID+"_solved"));
+}
+
 function correct_answer(answer) {
     let answer_box = document.querySelector("[jigsaw-element='answer_correct_text']");
     answer_box.innerHTML = answer;
@@ -40,7 +44,11 @@ function correct_answer(answer) {
         [answer_correct_area_other_display, answer_correct_area.style.display] = [answer_correct_area.style.display, answer_correct_area_other_display];
     }
 
-    localStorage.setItem(item.ID+"_solved", "TRUE");
+    let answer_submit_area = document.querySelector("[jigsaw-element='answer_submit_area']");
+    answer_submit_area.style.display = "none";
+
+    localStorage.setItem(item.ID+"_solved", answer);
+    localStorage.setItem("puzzles_solved", parseInt(localStorage.getItem("puzzles_solved"))+1);
 }
 
 function incorrect_answer(answer) {
