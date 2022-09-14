@@ -26,7 +26,7 @@ var storage_init_script;
 { let data = fs.readFileSync("storage_init_template.js", "utf8");
 storage_init_script = data.toString();
 }
-storage_init_script = "localStorage.setItem('puzzle_data', '" + JSON.stringify(puzzle_data) + "');\n" + storage_init_script;
+storage_init_script = "var puzzle_data = '" + JSON.stringify(puzzle_data) + "';\n" + storage_init_script;
 fs.writeFileSync("storage_init.js", storage_init_script);
 
 

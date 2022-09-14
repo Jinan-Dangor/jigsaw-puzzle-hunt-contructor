@@ -36,10 +36,9 @@ function evaluate_condition(condition) {
 // Doesn't yet account for timed unlocks
 function evaluate_num_unlocks(target) {
     let num_unlocks = parseInt(localStorage.getItem("puzzles_solved"));
-    console.log("Comparing " + num_unlocks + " to the desired " + target + " unlocks.");
     return num_unlocks >= target;
 }
 
 function evaluate_puzzle_solved(puzzle_id) {
-    return localStorage.getItem(puzzle_id+"_solved") == "TRUE";
+    return localStorage.getItem(puzzle_id+"_solved") != null;
 }
