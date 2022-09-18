@@ -1,20 +1,30 @@
 const fs = require("fs");
 
+// USER MAY WISH TO CHANGE THESE VARIABLES
+// Pages to create for each round
+var round_pages = ["round_page_template.html"];
+// Pages to create for each puzzle
+var puzzle_pages = ["puzzle_page_template.html", "call_in_answer_page_template.html", "solution_page_template.html"];
+
+// BE CAREFUL EDITTING ANYTHING FROM HERE ONWARDS
 var puzzle_data;
 { let data = fs.readFileSync("../data/puzzle_data.json", "utf8");
   const file_data = data.toString();
   puzzle_data = JSON.parse(file_data);
 }
 
-var round_page_html;
-{ let data = fs.readFileSync("round_page_template.html", "utf8");
-  round_page_html = data.toString();
+var round_pages_html = [];
+for (let i = 0; i < round_pages.length; i++) {
+  let data = fs.readFileSync(round_pages[i], "utf8");
+  round_pages_html.push(data.toString());
 }
 
-var puzzle_page_html;
-{ let data = fs.readFileSync("puzzle_page_template.html", "utf8");
-  puzzle_page_html = data.toString();
+var puzzle_pages_html = [];
+for (let i = 0; i < puzzle_pages.length; i++) {
+  let data = fs.readFileSync(puzzle_pages[i], "utf8");
+  puzzle_pages_html.push(data.toString());
 }
+
 
 // Generate Pages
 for (let i = 0; i < puzzle_data.contents.length; i++) {
@@ -43,8 +53,11 @@ function generate_page(item, parents) {
 }
 
 function generate_round_page(round, parents) {
-  let round_page_html_modified = make_subtitutions(round_page_html, round, parents) + '\n\n<script src="template_filler.js"></script>';
-  fs.writeFileSync("../hunt_deployment/round_page_" + round.page, round_page_html_modified);
+  for (let i = 0; i < round_pages_html.length; i++) {
+    let round_page_html_modified = make_subtitutions(round_pages_html[i], round, parents) + '\n\n<script src="template_filler.js"></script>';
+    fs.writeFileSync("../hunt_deployment/" + round.page.replace(".html", "") + "_" + round_pages[i].replace("_page_template.html", "") + ".html", round_page_html_modified);
+  }
+  
 
   for (let i = 0; i < round.contents.length; i++) {
     let new_parents = Array.from(parents);
@@ -54,8 +67,10 @@ function generate_round_page(round, parents) {
 }
 
 function generate_puzzle_page(puzzle, parents) {
-  let puzzle_page_html_modified = make_subtitutions(puzzle_page_html, puzzle, parents) + '\n\n<script src="template_filler.js"></script>';
-  fs.writeFileSync("../hunt_deployment/puzzle_page_" + puzzle.page, puzzle_page_html_modified);
+  for (let i = 0; i < puzzle_pages_html.length; i++) {
+    let puzzle_page_html_modified = make_subtitutions(puzzle_pages_html[i], puzzle, parents) + '\n\n<script src="template_filler.js"></script>';
+    fs.writeFileSync("../hunt_deployment/" + puzzle.page.replace(".html", "") + "_" + puzzle_pages[i].replace("_page_template.html", "") + ".html", puzzle_page_html_modified);
+  }
 }
 
 
