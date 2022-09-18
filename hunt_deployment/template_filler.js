@@ -44,6 +44,9 @@ function evaluate_num_unlocks(target) {
 }
 
 function evaluate_puzzle_solved(puzzle_id) {
+    console.log(puzzle_id);
+    console.log(localStorage.getItem(puzzle_id+"_solved"));
+    console.log(localStorage.getItem(puzzle_id+"_solved") != null);
     return localStorage.getItem(puzzle_id+"_solved") != null;
 }
 
