@@ -11,6 +11,7 @@ for (let i = 0; i < hidden_tags.length; i++) {
     }
 }
 
+// Conditions evaluated 'AND'-wise
 function evaluate_conditions(condition) {
     let conditions = condition.split(";");
     for (let i = 0; i < conditions.length; i++) {
@@ -44,9 +45,6 @@ function evaluate_num_unlocks(target) {
 }
 
 function evaluate_puzzle_solved(puzzle_id) {
-    console.log(puzzle_id);
-    console.log(localStorage.getItem(puzzle_id+"_solved"));
-    console.log(localStorage.getItem(puzzle_id+"_solved") != null);
     return localStorage.getItem(puzzle_id+"_solved") != null;
 }
 
