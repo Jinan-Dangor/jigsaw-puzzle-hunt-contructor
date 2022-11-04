@@ -115,5 +115,120 @@
                 }
             ]
         }
-    ]
+    ],
+    "hunt_settings_format": {
+        "shown_settings_list": [
+            "start_time",
+            "starting_unlocked_puzzles",
+            "puzzle_unlocks",
+            "hint_unlocks",
+            "solution_unlocks",
+            "reveal_full_solution_after_solve",
+            "restrict_unlocks_to_round"
+        ],
+        "settings_details": {
+            "start_time": {
+                "type": "date_time",
+                "name": "Hunt Start",
+                "description": "The date/time for your hunt to start."
+            },
+            "starting_unlocked_puzzles": {
+                "type": "integer",
+                "name": "Initial Puzzles",
+                "description": "How many puzzles you want unlocked when the hunt starts."
+            },
+            "puzzle_unlocks": {
+                "type": "optional_array",
+                "name": "Puzzle Unlocks Over Time",
+                "description": "When (if at all) do you want puzzles to unlock over time?",
+                "array_contents": [
+                    "unlock_schedule",
+                    "unlock_period",
+                    "unlock_frequency"
+                ]
+            },
+            "hint_unlocks": {
+                "type": "optional_array",
+                "name": "Hint Unlocks Over Time",
+                "description": "When (if at all) do you want hints to unlock over time?",
+                "array_contents": [
+                    "unlock_schedule",
+                    "unlock_period",
+                    "unlock_frequency"
+                ]
+            },
+            "solution_unlocks": {
+                "type": "optional_array",
+                "name": "Solution Unlocks Over Time",
+                "description": "When (if at all) do you want to unlock solutions to puzzles for free?",
+                "array_contents": [
+                    "unlock_schedule",
+                    "unlock_period",
+                    "unlock_frequency"
+                ]
+            },
+            "unlock_schedule": {
+                "type": "list",
+                "name": "Unlock Schedule",
+                "description": "Unlock regularly after a period of time, or set specific dates/time for unlocks?",
+                "list": [
+                    "regular",
+                    "irregular"
+                ]
+            },
+            "unlock_period": {
+                "type": "list",
+                "name": "Unlock Period",
+                "description": "What interval do you want to set for unlocks?",
+                "list": [
+                    "hours",
+                    "days",
+                    "weeks"
+                ]
+            },
+            "unlock_frequency": {
+                "type": "integer",
+                "name": "Unlock Frequency",
+                "description": "One puzzle will unlock after this many Unlock Periods have passed."
+            },
+            "reveal_full_solution_after_solve": {
+                "type": "boolean",
+                "name": "Reveal Solutions",
+                "description": "Reveal the full solution to a puzzle after solving it."
+            },
+            "restrict_unlocks_to_round": {
+                "type": "boolean",
+                "name": "Round-Lock Unlocks",
+                "description": "Solving a puzzle will only ever unlock puzzles from its round."
+            }
+        }
+        
+    },
+    "hunt_settings": {
+        "start_time": "",
+        "starting_unlocked_puzzles": "1",
+        "puzzle_unlocks": [
+            {
+                "unlock_schedule": "regular",
+                "unlock_period": "hours",
+                "unlock_frequency": "1" 
+            }
+        ],
+        "hint_unlocks": [
+            {
+                "unlock_schedule": "regular",
+                "unlock_period": "hours",
+                "unlock_frequency": "1" 
+            }
+        ],
+        "solution_unlocks": [
+            {
+                "unlock_schedule": "regular",
+                "unlock_period": "hours",
+                "unlock_frequency": "2" 
+            }
+        ],
+        "reveal_full_solution_after_solve": "false",
+        "restrict_unlocks_to_round": "false"
+    }
 }

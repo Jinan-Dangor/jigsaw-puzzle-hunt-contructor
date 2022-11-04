@@ -25,6 +25,11 @@ for (let i = 0; i < puzzle_pages.length; i++) {
   puzzle_pages_html.push(data.toString());
 }
 
+var hunt_settings_page_html;
+{
+  let data = fs.readFileSync("hunt_settings_page_template.html", "utf8");
+  hunt_settings_page_html = data.toString();
+}
 
 // Generate Pages
 for (let i = 0; i < puzzle_data.contents.length; i++) {
@@ -38,6 +43,16 @@ storage_init_script = data.toString();
 }
 storage_init_script = "var puzzle_data = '" + JSON.stringify(puzzle_data) + "';\n" + storage_init_script;
 fs.writeFileSync("../hunt_deployment/scripts/storage_init.js", storage_init_script);
+
+// Generate hunt settings page
+let hunt_settings_body = "";
+for (let i = 0; i < puzzle_data.hunt_settings_format.shown_settings_list.length; i++) {
+  let settings_obj = puzzle_data.hunt_settings_format.settings_details[puzzle_data.hunt_settings_format.shown_settings_list[i]];
+  hunt_settings_body += get_hunt_settings_component(settings_obj, puzzle_data.hunt_settings_format.shown_settings_list[i], puzzle_data.hunt_settings_format.settings_details);
+  hunt_settings_body += "<br>\n";
+}
+let hunt_settings_page = hunt_settings_page_html.replace("%JIGSAW%HUNT_SETTINGS%PLACEHOLDER%", hunt_settings_body);
+fs.writeFileSync("../hunt_deployment/hunt_settings_page.html", hunt_settings_page);
 
 
 
@@ -128,4 +143,38 @@ function make_elements_hidden(page) {
   }
 
   return page;
+}
+
+function get_hunt_settings_component(settings, settings_id, settings_details) {
+  let id = settings_id;
+  let type = settings.type;
+  let name = settings.name;
+  let description = settings.description;
+  switch (type) {
+    case "boolean":
+      return `<input type="checkbox" id="${id}"><label for="${id}">${name}</label>`;
+    // Currently integer are 1, minimum - may be worth adding additional settings
+    case "integer":
+      return `<label for="${id}">${name}</label><input type="number" id="${id}" min="1">`;
+    case "date_time":
+      return `<label for="${id}">${name}</label><input type="datetime-local" id="${id}">`;
+    case "list":
+      let list_contents = `<label for="${id}">${name}</label><select id="${id}">\n`;
+      for (let i = 0; i < settings.list.length; i++) {
+        list_contents += `<option value="${settings.list[i]}">${settings.list[i]}</option>`;
+        list_contents += "\n";
+      }
+      list_contents += `</select>\n`;
+      return list_contents;
+    case "optional_array":
+      let optional_array_contents = `<h2>${name}</h2>\n`;
+      for (let i = 0; i < settings.array_contents.length; i++) {
+        optional_array_contents += get_hunt_settings_component(settings_details[settings.array_contents[i]], settings.array_contents[i], settings_details);
+        optional_array_contents += "<br>\n";
+      }
+      return optional_array_contents;
+    default:
+      return `<!---Type ${type} not supported--->`;
+  }
+
 }
