@@ -1,3 +1,5 @@
+var puzzle_data = JSON.parse(localStorage.getItem("puzzle_data"));
+
 let hidden_tags = document.querySelectorAll("[jigsaw-hidden]");
 
 // TODO: initially hidden, unhidden upon not removing
@@ -38,9 +40,8 @@ function evaluate_condition(condition) {
     }
 }
 
-// Doesn't yet account for timed unlocks
 function evaluate_num_unlocks(target) {
-    let num_unlocks = parseInt(localStorage.getItem("puzzles_solved"));
+    let num_unlocks = parseInt(localStorage.getItem("puzzles_solved")) + calculate_times_unlocks();
     return num_unlocks >= target;
 }
 
@@ -49,7 +50,6 @@ function evaluate_puzzle_solved(puzzle_id) {
 }
 
 function evaluate_puzzle_unlocked(puzzle_id) {
-    let puzzle_data = JSON.parse(localStorage.getItem("puzzle_data"));
     let item_and_parents = get_item_and_parents_by_id(puzzle_data, puzzle_id);
     let item = item_and_parents.shift();
     return evaluate_condition(get_field(item, item_and_parents, "unlock_condition"));
@@ -86,4 +86,30 @@ function get_item_and_parents_by_id(data, id) {
     }
 
     return null;
+}
+
+function calculate_times_unlocks() {
+    let start_date = new Date(puzzle_data.hunt_settings.start_time);
+    let now = Date.now();
+    let time_elapsed = now - start_date;
+    let unlock_period = puzzle_data.hunt_settings.puzzle_unlocks.unlock_period;
+    let starting_puzzles = parseInt(puzzle_data.hunt_settings.starting_unlocked_puzzles);
+    let puzzles_unlocked = Math.floor(time_elapsed/period_in_ms(unlock_period)) + starting_puzzles;
+    return puzzles_unlocked;
+}
+
+function period_in_ms(period) {
+    let ms_in_an_hour = 1000*60*60;
+    let ms_in_a_day = 24*ms_in_an_hour;
+    let ms_in_a_week = 7*ms_in_a_day;
+    switch (period) {
+        case "hours":
+            return ms_in_an_hour;
+        case "days":
+            return ms_in_a_day;
+        case "weeks":
+            return ms_in_a_week;
+        default:
+            return ms_in_an_hour;
+    }
 }
