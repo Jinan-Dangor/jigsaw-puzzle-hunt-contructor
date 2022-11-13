@@ -52,7 +52,7 @@ for (let i = 0; i < puzzle_data.hunt_settings_format.shown_settings_list.length;
   hunt_settings_body += "<br>\n";
 }
 let hunt_settings_page = hunt_settings_page_html.replace("%JIGSAW%HUNT_SETTINGS%PLACEHOLDER%", hunt_settings_body);
-fs.writeFileSync("../hunt_deployment/hunt_settings_page.html", hunt_settings_page);
+fs.writeFileSync("../hunt_deployment/pages/hunt_settings_page.html", hunt_settings_page);
 
 
 
@@ -69,8 +69,10 @@ function generate_page(item, parents) {
 
 function generate_round_page(round, parents) {
   for (let i = 0; i < round_pages_html.length; i++) {
-    let round_page_html_modified = make_subtitutions(round_pages_html[i], round, parents) + '\n\n<script src="scripts/template_filler.js"></script>';
-    fs.writeFileSync("../hunt_deployment/" + round.ID + "_" + round_pages[i].replace("_page_template.html", "") + ".html", round_page_html_modified);
+    let round_page_html_modified = make_subtitutions(round_pages_html[i], round, parents);
+    round_page_html_modified += '\n\n<script src="../scripts/libraries/local_storage_lib.js"></script>';
+    round_page_html_modified += '\n\n<script src="../scripts/template_filler.js"></script>';
+    fs.writeFileSync("../hunt_deployment/pages/" + round.ID + "_" + round_pages[i].replace("_page_template.html", "") + ".html", round_page_html_modified);
   }
   
 
@@ -83,8 +85,10 @@ function generate_round_page(round, parents) {
 
 function generate_puzzle_page(puzzle, parents) {
   for (let i = 0; i < puzzle_pages_html.length; i++) {
-    let puzzle_page_html_modified = make_subtitutions(puzzle_pages_html[i], puzzle, parents) + '\n\n<script src="scripts/template_filler.js"></script>';
-    fs.writeFileSync("../hunt_deployment/" + puzzle.ID + "_" + puzzle_pages[i].replace("_page_template.html", "") + ".html", puzzle_page_html_modified);
+    let puzzle_page_html_modified = make_subtitutions(puzzle_pages_html[i], puzzle, parents);
+    puzzle_page_html_modified += '\n\n<script src="../scripts/libraries/local_storage_lib.js"></script>';
+    puzzle_page_html_modified += '\n\n<script src="../scripts/template_filler.js"></script>';
+    fs.writeFileSync("../hunt_deployment/pages/" + puzzle.ID + "_" + puzzle_pages[i].replace("_page_template.html", "") + ".html", puzzle_page_html_modified);
   }
 }
 

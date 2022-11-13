@@ -26,7 +26,6 @@ function collect_hunt_settings(hunt_settings_format, hunt_settings) {
 }
 
 function collect_setting(hunt_settings_details, hunt_settings, setting_id) {
-    console.log("Collecting " + setting_id);
     let setting_type = hunt_settings_details[setting_id].type;
     switch (setting_type) {
         case "boolean":
