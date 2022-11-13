@@ -22,12 +22,38 @@ if (answer_submit_button != null) { answer_submit_button.onclick = check_answer;
 function check_answer() {
     let answer_textbox = document.querySelector("[jigsaw-element='answer_submit_entry']");
     let normalised_answer = answer_textbox.value.replace(/[^a-zA-Z\d]/g,'').toUpperCase();
+    console.log("Comparing " + item.solution.replace(/[^a-zA-Z\d]/g,'').toUpperCase() + " to " + normalised_answer);
     if (item.solution.replace(/[^a-zA-Z\d]/g,'').toUpperCase() == normalised_answer) {
+        if (puzzle_data.hunt_settings.use_solution_formats) {
+            normalised_answer = format_answer(normalised_answer, item.solution_format);
+        }
         correct_answer(normalised_answer);
         log_correct_answer(normalised_answer);
     } else {
         incorrect_answer(normalised_answer);
     }
+}
+
+function format_answer(answer, format) {
+    if (format == undefined) {
+        return answer;
+    }
+    console.log(answer);
+    let formatted_answer = format;
+    let answer_pos = 0;
+    for (let i = 0; i < format.length; i++) {
+        if (format[i] == '.') {
+            console.log(formatted_answer[i] + " = " + answer[answer_pos]);
+            formatted_answer = str_replace_at(formatted_answer, i, answer[answer_pos]);
+            answer_pos++;
+            console.log(formatted_answer);
+        }
+    }
+    return formatted_answer;
+}
+
+function str_replace_at(str, i, char) {
+    return str.substring(0, i) + char + str.substring(i+1);
 }
 
 var answer_correct_area = document.querySelector("[jigsaw-element='answer_correct_area']");

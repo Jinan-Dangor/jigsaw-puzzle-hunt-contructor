@@ -41,7 +41,7 @@ var storage_init_script;
 { let data = fs.readFileSync("storage_init_template.js", "utf8");
 storage_init_script = data.toString();
 }
-storage_init_script = "var puzzle_data = '" + JSON.stringify(puzzle_data) + "';\n" + storage_init_script;
+storage_init_script = "var puzzle_data = '" + JSON.stringify(puzzle_data).replace(/\'/g,'\\\'') + "';\n" + storage_init_script;
 fs.writeFileSync("../hunt_deployment/scripts/storage_init.js", storage_init_script);
 
 // Generate hunt settings page
@@ -153,14 +153,22 @@ function get_hunt_settings_component(settings, settings_id, settings_details) {
   let type = settings.type;
   let name = settings.name;
   let description = settings.description;
+  let component_html = "";
+
   switch (type) {
     case "boolean":
-      return `<input type="checkbox" id="${id}"><label for="${id}">${name}</label>`;
+      component_html = `<input type="checkbox" id="${id}"><label for="${id}">${name}</label>`;
+      component_html += `<div class="tooltip"><p>${description}</p></div>`;
+      break;
     // Currently integer are 1, minimum - may be worth adding additional settings
     case "integer":
-      return `<label for="${id}">${name}</label><input type="number" id="${id}" min="1">`;
+      component_html = `<label for="${id}">${name}</label><input type="number" id="${id}" min="1">`;
+      component_html += `<div class="tooltip"><p>${description}</p></div>`;
+      break;
     case "date_time":
-      return `<label for="${id}">${name}</label><input type="datetime-local" id="${id}">`;
+      component_html = `<label for="${id}">${name}</label><input type="datetime-local" id="${id}">`;
+      component_html += `<div class="tooltip"><p>${description}</p></div>`;
+      break;
     case "list":
       let list_contents = `<label for="${id}">${name}</label><select id="${id}">\n`;
       for (let i = 0; i < settings.list.length; i++) {
@@ -168,16 +176,21 @@ function get_hunt_settings_component(settings, settings_id, settings_details) {
         list_contents += "\n";
       }
       list_contents += `</select>\n`;
-      return list_contents;
+      component_html = list_contents;
+      component_html += `<div class="tooltip"><p>${description}</p></div>`;
+      break;
     case "optional_array":
-      let optional_array_contents = `<h2>${name}</h2>\n`;
+      let optional_array_contents = `<div>` + `<h2 style="display:inline;">${name}</h2>` + `<div class="tooltip"><p>${description}</p></div><br>` + `</div>`;
       for (let i = 0; i < settings.array_contents.length; i++) {
         optional_array_contents += get_hunt_settings_component(settings_details[settings.array_contents[i]], settings.array_contents[i], settings_details);
         optional_array_contents += "<br>\n";
       }
-      return optional_array_contents;
+      component_html = optional_array_contents;
+      break
     default:
-      return `<!---Type ${type} not supported--->`;
+      component_html = `<!---Type ${type} not supported--->`;
   }
+
+  return component_html;
 
 }

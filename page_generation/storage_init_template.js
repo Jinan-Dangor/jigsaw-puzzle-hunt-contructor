@@ -29,7 +29,6 @@ function collect_setting(hunt_settings_details, hunt_settings, setting_id) {
     let setting_type = hunt_settings_details[setting_id].type;
     switch (setting_type) {
         case "boolean":
-            console.log("Boolean for " + setting_id + " is check: " + document.getElementById(setting_id).checked);
             hunt_settings[setting_id] = document.getElementById(setting_id).checked;
             break;
         case "integer":

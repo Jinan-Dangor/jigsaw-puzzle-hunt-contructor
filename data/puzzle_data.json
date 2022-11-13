@@ -9,48 +9,53 @@
                 {  
                     "class": "puzzle",
                     "ID": "PUZZLE01",
-                    "name": "Puzzle 01",
-                    "solution": "Solution 01",
+                    "name": "Puzzle 01, answer BOONDOCKS",
+                    "solution": "BOONDOCKS",
                     "unlock_condition": "NUM_UNLOCKS:1",
                     "page": "puzzle01.html"
                 },
                 {  
                     "class": "puzzle",
                     "ID": "PUZZLE02",
-                    "name": "Puzzle 02",
-                    "solution": "Solution 02",
+                    "name": "Puzzle 02, answer I'M ALIVE",
+                    "solution": "I'M ALIVE",
+                    "solution_format": ".'. .....",
                     "unlock_condition": "NUM_UNLOCKS:2",
                     "page": "puzzle02.html"
                 },
                 {  
                     "class": "puzzle",
                     "ID": "PUZZLE03",
-                    "name": "Puzzle 03",
-                    "solution": "Solution 03",
+                    "name": "Puzzle 03, answer ONE-BY-ONE",
+                    "solution": "ONE-BY-ONE",
+                    "solution_format": "...-..-...",
                     "unlock_condition": "NUM_UNLOCKS:3",
                     "page": "puzzle03.html"
                 },
                 {  
                     "class": "puzzle",
                     "ID": "PUZZLE04",
-                    "name": "Puzzle 04",
-                    "solution": "Solution 04",
+                    "name": "Puzzle 04, answer YES/NO",
+                    "solution": "YES/NO",
+                    "solution_format": ".../..",
                     "unlock_condition": "NUM_UNLOCKS:4",
                     "page": "puzzle04.html"
                 },
                 {  
                     "class": "puzzle",
                     "ID": "PUZZLE05",
-                    "name": "Puzzle 05",
-                    "solution": "Solution 05",
+                    "name": "Puzzle 05, answer THIS IS WHAT I NEED",
+                    "solution": "THIS IS WHAT I NEED",
+                    "solution_format": ".... .. .... . ....",
                     "unlock_condition": "NUM_UNLOCKS:5",
                     "page": "puzzle05.html"
                 },
                 {  
                     "class": "puzzle",
                     "ID": "PUZZLE06",
-                    "name": "Puzzle 06",
-                    "solution": "Solution 06",
+                    "name": "Puzzle 06, answer WHY?",
+                    "solution": "WHY?",
+                    "solution_format": "...?",
                     "unlock_condition": "NUM_UNLOCKS:6",
                     "page": "puzzle06.html"
                 }
@@ -209,6 +214,7 @@
         
     },
     "hunt_settings": {
+        "hunt_name": "Test Hunt",
         "start_time": "",
         "starting_unlocked_puzzles": "1",
         "puzzle_unlocks": [
@@ -232,6 +238,7 @@
                 "unlock_frequency": "2" 
             }
         ],
+        "use_solution_formats": "true",
         "reveal_full_solution_after_solve": "false",
         "restrict_unlocks_to_round": "false"
     }

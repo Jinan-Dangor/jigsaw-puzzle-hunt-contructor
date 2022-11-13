@@ -1,51 +1,50 @@
+<link rel="stylesheet" href="../stylesheets/help_tip.css">
+
 <h1>Set Hunt Settings</h1>
 <div>
-<label for="start_time">Hunt Start</label><input type="datetime-local" id="start_time"><br>
-<label for="starting_unlocked_puzzles">Initial Puzzles</label><input type="number" id="starting_unlocked_puzzles" min="1"><br>
-<h2>Puzzle Unlocks Over Time</h2>
-<label for="unlock_schedule">Unlock Schedule</label><select id="unlock_schedule">
+<label for="start_time">Hunt Start</label><input type="datetime-local" id="start_time"><div class="tooltip"><p>The date/time for your hunt to start.</p></div><br>
+<label for="starting_unlocked_puzzles">Initial Puzzles</label><input type="number" id="starting_unlocked_puzzles" min="1"><div class="tooltip"><p>How many puzzles you want unlocked when the hunt starts.</p></div><br>
+<div><h2 style="display:inline;">Puzzle Unlocks Over Time</h2><div class="tooltip"><p>When (if at all) do you want puzzles to unlock over time?</p></div><br></div><label for="unlock_schedule">Unlock Schedule</label><select id="unlock_schedule">
 <option value="regular">regular</option>
 <option value="irregular">irregular</option>
 </select>
-<br>
+<div class="tooltip"><p>Unlock regularly after a period of time, or set specific dates/time for unlocks?</p></div><br>
 <label for="unlock_period">Unlock Period</label><select id="unlock_period">
 <option value="hours">hours</option>
 <option value="days">days</option>
 <option value="weeks">weeks</option>
 </select>
+<div class="tooltip"><p>What interval do you want to set for unlocks?</p></div><br>
+<label for="unlock_frequency">Unlock Frequency</label><input type="number" id="unlock_frequency" min="1"><div class="tooltip"><p>One puzzle will unlock after this many Unlock Periods have passed.</p></div><br>
 <br>
-<label for="unlock_frequency">Unlock Frequency</label><input type="number" id="unlock_frequency" min="1"><br>
-<br>
-<h2>Hint Unlocks Over Time</h2>
-<label for="unlock_schedule">Unlock Schedule</label><select id="unlock_schedule">
+<div><h2 style="display:inline;">Hint Unlocks Over Time</h2><div class="tooltip"><p>When (if at all) do you want hints to unlock over time?</p></div><br></div><label for="unlock_schedule">Unlock Schedule</label><select id="unlock_schedule">
 <option value="regular">regular</option>
 <option value="irregular">irregular</option>
 </select>
-<br>
+<div class="tooltip"><p>Unlock regularly after a period of time, or set specific dates/time for unlocks?</p></div><br>
 <label for="unlock_period">Unlock Period</label><select id="unlock_period">
 <option value="hours">hours</option>
 <option value="days">days</option>
 <option value="weeks">weeks</option>
 </select>
+<div class="tooltip"><p>What interval do you want to set for unlocks?</p></div><br>
+<label for="unlock_frequency">Unlock Frequency</label><input type="number" id="unlock_frequency" min="1"><div class="tooltip"><p>One puzzle will unlock after this many Unlock Periods have passed.</p></div><br>
 <br>
-<label for="unlock_frequency">Unlock Frequency</label><input type="number" id="unlock_frequency" min="1"><br>
-<br>
-<h2>Solution Unlocks Over Time</h2>
-<label for="unlock_schedule">Unlock Schedule</label><select id="unlock_schedule">
+<div><h2 style="display:inline;">Solution Unlocks Over Time</h2><div class="tooltip"><p>When (if at all) do you want to unlock solutions to puzzles for free?</p></div><br></div><label for="unlock_schedule">Unlock Schedule</label><select id="unlock_schedule">
 <option value="regular">regular</option>
 <option value="irregular">irregular</option>
 </select>
-<br>
+<div class="tooltip"><p>Unlock regularly after a period of time, or set specific dates/time for unlocks?</p></div><br>
 <label for="unlock_period">Unlock Period</label><select id="unlock_period">
 <option value="hours">hours</option>
 <option value="days">days</option>
 <option value="weeks">weeks</option>
 </select>
+<div class="tooltip"><p>What interval do you want to set for unlocks?</p></div><br>
+<label for="unlock_frequency">Unlock Frequency</label><input type="number" id="unlock_frequency" min="1"><div class="tooltip"><p>One puzzle will unlock after this many Unlock Periods have passed.</p></div><br>
 <br>
-<label for="unlock_frequency">Unlock Frequency</label><input type="number" id="unlock_frequency" min="1"><br>
-<br>
-<input type="checkbox" id="reveal_full_solution_after_solve"><label for="reveal_full_solution_after_solve">Reveal Solutions</label><br>
-<input type="checkbox" id="restrict_unlocks_to_round"><label for="restrict_unlocks_to_round">Round-Lock Unlocks</label><br>
+<input type="checkbox" id="reveal_full_solution_after_solve"><label for="reveal_full_solution_after_solve">Reveal Solutions</label><div class="tooltip"><p>Reveal the full solution to a puzzle after solving it.</p></div><br>
+<input type="checkbox" id="restrict_unlocks_to_round"><label for="restrict_unlocks_to_round">Round-Lock Unlocks</label><div class="tooltip"><p>Solving a puzzle will only ever unlock puzzles from its round.</p></div><br>
 
 </div>
 <button jigsaw-element="init_storage_button">Initialise Storage</button>
