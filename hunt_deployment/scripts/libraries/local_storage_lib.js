@@ -1,5 +1,6 @@
 // This document contains shared functions for manipulating data stored in localStorage
 
+// This function is duplicated in the template_executor
 function get_field(item, parents, field) {
     if (item.hasOwnProperty(field)) {
         return item[field];

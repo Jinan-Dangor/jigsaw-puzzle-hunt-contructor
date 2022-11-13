@@ -92,8 +92,6 @@ function generate_puzzle_page(puzzle, parents) {
   }
 }
 
-
-
 function make_subtitutions(page, item, parents) {
   const spaces_to_fill = page.match(/\%JIGSAW\%[^%]*\%[^%]*\%/g);
   for (let i = 0; i < spaces_to_fill.length; i++) {
@@ -110,6 +108,7 @@ function make_subtitutions(page, item, parents) {
   return page;
 }
 
+// This function is duplicated in the local_storage_lib
 function get_field(item, parents, field) {
   if (item.hasOwnProperty(field)) {
     return item[field];
