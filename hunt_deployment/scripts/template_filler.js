@@ -30,16 +30,33 @@ function evaluate_condition(condition) {
     let condition_breakdown = condition.split(":");
     let condition_type = condition_breakdown[0];
     let condition_args = condition_breakdown[1];
-
-    if        (condition_type == "NUM_UNLOCKS") {
-        return evaluate_num_unlocks(parseInt(condition_args));
-    } else if (condition_type == "PUZZLE_SOLVED") {
-        return evaluate_puzzle_solved(condition_args);
-    } else if (condition_type == "PUZZLE_UNLOCKED") {
-        return evaluate_puzzle_unlocked(condition_args);
-    } else {
-        return false;
+    let result = false;
+    let invert = condition_type[0] == '!';
+    if (invert) {
+        condition_type = condition_type.substring(1);
     }
+
+    if (puzzle_data == null) {
+        result = false;
+    } else if (condition_type == "NUM_UNLOCKS") {
+        result = evaluate_num_unlocks(parseInt(condition_args));
+    } else if (condition_type == "PUZZLE_SOLVED") {
+        result = evaluate_puzzle_solved(condition_args);
+    } else if (condition_type == "PUZZLE_UNLOCKED") {
+        result = evaluate_puzzle_unlocked(condition_args);
+    } else if (condition_type == "HUNT_READY") {
+        result = puzzle_data != null;
+    } else if (condition_type == "HUNT_STARTED") {
+        let now = Date.now();
+        let start_time = new Date(puzzle_data.hunt_settings.start_time);
+        result = now >= start_time;
+    }
+
+    if (invert) {
+        result = !result;
+    }
+
+    return result;
 }
 
 function evaluate_num_unlocks(target) {
