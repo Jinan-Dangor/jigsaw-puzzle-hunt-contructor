@@ -157,17 +157,23 @@ function get_hunt_settings_component(settings, settings_id, settings_details) {
 
   switch (type) {
     case "boolean":
-      component_html = `<input type="checkbox" id="${id}"><label for="${id}">${name}</label>`;
+      component_html  = `<div class="jigsaw-settings-boolean">`;
+      component_html += `<input type="checkbox" id="${id}"><label for="${id}">${name}</label>`;
       component_html += `<div class="tooltip"><p>${description}</p></div>`;
+      component_html += `</div>`;
       break;
     // Currently integer are 1, minimum - may be worth adding additional settings
     case "integer":
-      component_html = `<label for="${id}">${name}</label><input type="number" id="${id}" min="1">`;
+      component_html  = `<div class="jigsaw-settings-integer">`;  
+      component_html += `<label for="${id}" class="jigsaw-settings-integer-label">${name}</label><input type="number" id="${id}" min="1" class="jigsaw-settings-integer">`;
       component_html += `<div class="tooltip"><p>${description}</p></div>`;
+      component_html += `</div>`;
       break;
     case "date_time":
-      component_html = `<label for="${id}">${name}</label><input type="datetime-local" id="${id}">`;
+      component_html  = `<div class="jigsaw-settings-data-time">`;  
+      component_html += `<label for="${id}">${name}</label><input type="datetime-local" id="${id}">`;
       component_html += `<div class="tooltip"><p>${description}</p></div>`;
+      component_html += `</div>`;
       break;
     case "list":
       let list_contents = `<label for="${id}">${name}</label><select id="${id}">\n`;
@@ -176,16 +182,20 @@ function get_hunt_settings_component(settings, settings_id, settings_details) {
         list_contents += "\n";
       }
       list_contents += `</select>\n`;
-      component_html = list_contents;
+      component_html  = `<div class="jigsaw-settings-list">`;
+      component_html += list_contents;
       component_html += `<div class="tooltip"><p>${description}</p></div>`;
+      component_html += `</div>`;
       break;
     case "optional_array":
-      let optional_array_contents = `<div>` + `<h2 style="display:inline;">${name}</h2>` + `<div class="tooltip"><p>${description}</p></div><br>` + `</div>`;
+      let optional_array_contents = `<div>` + `<h2>${name}</h2>` + `<div class="tooltip"><p>${description}</p></div><br>` + `</div>`;
       for (let i = 0; i < settings.array_contents.length; i++) {
         optional_array_contents += get_hunt_settings_component(settings_details[settings.array_contents[i]], settings.array_contents[i], settings_details);
         optional_array_contents += "<br>\n";
       }
-      component_html = optional_array_contents;
+      component_html  = `<div class="jigsaw-settings-optional-array">`;
+      component_html += optional_array_contents;
+      component_html += `</div>`;
       break
     default:
       component_html = `<!---Type ${type} not supported--->`;
